@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Slick2D">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../Slick2D" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/../Slick2D/Slick2D/lib/slick/javadoc" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../Slick2D/Slick2D/lib/slick/src" />
+      <root url="file://$PROJECT_DIR$/../Slick2D/Slick2D/lib/slick/tools" />
+      <root url="file://$PROJECT_DIR$/../Slick2D/Slick2D/src" />
+      <root url="file://$PROJECT_DIR$/../Slick2D/src/main/java" />
+    </SOURCES>
+  </library>
+</component>

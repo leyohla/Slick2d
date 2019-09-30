@@ -15,6 +15,7 @@ public class gameTemplate extends StateBasedGame {
     public static final int PLAY_SCREEN = 1;
     public static final int NINJA = 1;
     public static final int ENEMY = 1;
+    public static int gamescore = 0;
 
 
     public gameTemplate(String gamename) {
@@ -49,7 +50,9 @@ public class gameTemplate extends StateBasedGame {
             appgc = new AppGameContainer(new gameTemplate("Simple Slick Game"));
             appgc.setDisplayMode(1500, 1000, false);
             Display.setResizable(true);
-            appgc.setIcon("C:\\Users\\lhunn\\IdeaProjects\\Slick2D\\src\\main\\resources\\ninja-icon.png");
+//            appgc.setIcon("C:\\Users\\lhunn\\IdeaProjects\\Slick2D\\src\\main\\resources\\ninja-icon.png");
+            appgc.setIcon("src\\main\\resources\\ninja-icon.png");
+
             appgc.start();
         }
         catch (SlickException ex)

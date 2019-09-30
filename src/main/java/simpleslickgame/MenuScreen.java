@@ -18,7 +18,9 @@ public class MenuScreen extends BasicGameState {
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-        Image newgame = new Image("C:\\Users\\lhunn\\IdeaProjects\\Slick2D\\src\\main\\resources\\newgame.png");
+//        Image newgame = new Image("C:\\Users\\lhunn\\IdeaProjects\\Slick2D\\src\\main\\resources\\newgame.png");
+
+        Image newgame = new Image("src\\main\\resources\\newgame.png");
 
         g.drawString(gamename, 500, 200);
         g.drawString(mouse, 400, 300);

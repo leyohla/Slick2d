@@ -35,15 +35,20 @@ public class PlayScreen extends BasicGameState {
     private Animation blobfishAnimation1;
     private Animation blobfishAnimation2;
 
+    long runningTime = 0;
+    boolean HitsFish = true;
+    boolean blobfishAppears = true;
+    boolean blobfishTwoAppears = true;
 
     public PlayScreen(int state) {
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        background = new Image("C:\\Users\\lhunn\\IdeaProjects\\Slick2D\\src\\main\\resources\\image.png");
-        backgroundHitbox = new Image("C:\\Users\\lhunn\\IdeaProjects\\Slick2D\\src\\main\\resources\\image.png");
-        character = new Image("C:\\Users\\lhunn\\IdeaProjects\\Slick2D\\src\\main\\resources\\ninja-two.png");
-        enemy = new Image("C:\\Users\\lhunn\\IdeaProjects\\Slick2D\\src\\main\\resources\\enemy.png");
+
+        background = new Image("src\\main\\resources\\image.png");
+        backgroundHitbox = new Image("src\\main\\resources\\image.png");
+        character = new Image("src\\main\\resources\\ninja-two.png");
+        enemy = new Image("src\\main\\resources\\enemy.png");
 
         blobfishSpritesheet = new SpriteSheet("sprite_sheet.png", 300, 128);
         blobfishAnimation = new Animation(blobfishSpritesheet, 300);
@@ -60,12 +65,14 @@ public class PlayScreen extends BasicGameState {
         Image[] ninjaRight = {new Image("ninja-three.png"), new Image("ninja-three.png")};
         Image[] ninjaJump = {new Image("ninja-five.png"), new Image("ninja-five.png")};
 
+
         movingLeft = new Animation(ninjaLeft, duration, false);
         movingRight = new Animation(ninjaRight, duration, false);
         movingUp = new Animation(ninjaUp, duration, false);
         attack = new Animation(ninjaJump, duration, true);
         movingLeft.setAutoUpdate(true);
         ninja = movingLeft;
+
 
         Random enemyX = new Random();
         Random enemyY = new Random();
@@ -75,8 +82,10 @@ public class PlayScreen extends BasicGameState {
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+
         background.draw();
         g.drawString("X pos: " + characterX + "\nY pos: " + characterY, 400, 200);
+        g.drawString("Score: " + gameTemplate.gamescore, 700, 100);
 
         ninja.draw(characterX, characterY);
         Rectangle ninjaHitbox = new Rectangle(characterX, characterY, 130, 140);
@@ -100,50 +109,28 @@ public class PlayScreen extends BasicGameState {
         Iterator<Animation> iterator = list.iterator();
         //while (iterator.hasNext()){ //returns true if there are more elements in LinkedList
 
+        if(blobfishAppears == false){
+            blobfishTwoAppears = true;
+        }
+
+        if(blobfishAppears == true){
+            g.drawAnimation(blobfishAnimation, RandomX, RandomY);
+        }
+        if(blobfishTwoAppears == true){
+            g.drawAnimation(blobfishAnimation1, 360, 694);
+        }
+
         if(ninja == attack && ninjaHitbox.intersects(enemyHitbox)){
-            blobfishAnimation.stop();
-            background.draw(RandomX,RandomY);
+            blobfishAppears = false;
+            blobfishTwoAppears = true;
+            //background.draw(RandomX,RandomY);
             ninja.draw(characterX,characterY);
+            gameTemplate.gamescore += 10;
+        }
+        else{
+            blobfishTwoAppears = false;
         }
 
-        if (blobfishAnimation.isStopped()) {
-            background.draw(RandomX,RandomY);
-            g.drawAnimation(blobfishAnimation1,360, 694);
-            blobfishAnimation.draw(RandomX,RandomY,Color.red);
-            ninja.draw(characterX,characterY);
-        }
-
-            //g.drawAnimation(blobfishAnimation, 400,300);
-           // g.drawAnimation(blobfishAnimation1, 695,283);
-           // g.drawAnimation(blobfishAnimation2, 220, 103);
-
-        //instead of a list, add a for loop to loop through the blobfish at random locations,
-
-
-        //Array[] squareArray = new Array[20];
-
-        /*for(int i = 0; i <= squareArray.length; i++) {
-            if (ninja == attack && ninjaHitbox.intersects(enemyHitbox)) {
-                blobfishAnimation.draw(700, 700);
-            }
-        }*/
-
-        if(ninja != attack) {
-            if (!ninjaHitbox.intersects(enemyHitbox)) {
-                blobfishAnimation.draw(RandomX, RandomY);
-            }
-        }
-
-        else if (ninja == attack && !ninjaHitbox.intersects(enemyHitbox)) {
-            blobfishAnimation.draw(RandomX,RandomY);
-        }
-        if(ninja != attack && ninjaHitbox.intersects(enemyHitbox)) {
-            ninja.draw(characterX,characterY,Color.red);
-        }
-
-        if(ninja != attack){
-            blobfishAnimation.draw(RandomX, RandomY);
-        }
 
 
         if (quit == true) {
@@ -158,6 +145,11 @@ public class PlayScreen extends BasicGameState {
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input input = gc.getInput();
+
+        /*runningTime += delta;
+        if(runningTime > 200){
+            ninja = movingLeft;
+        }*/
 
         if (characterY < 793) {
             if (input.isKeyDown(Input.KEY_DOWN)) {
