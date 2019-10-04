@@ -1,4 +1,4 @@
-/* package simpleslickgame;
+ /*package simpleslickgame;
 
 import org.newdawn.slick.*;
 
@@ -8,7 +8,7 @@ import java.util.logging.Level;
 public class snakeGameTemplate extends BasicGame
 {
 
-    public float[][] snake_body = new float[200][2];
+    public float[][] snake_body = new float[200][2]; //how to use these???
     int snake_size=0; //length of the snake (how many circles)
     int foodx;
     int foody;
