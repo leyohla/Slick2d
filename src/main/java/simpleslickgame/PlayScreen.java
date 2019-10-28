@@ -24,7 +24,7 @@ public class PlayScreen extends BasicGameState {
     int characterY = 500;
     int enemyX;
     int enemyY;
-    int RandomX, RandomY;
+    private Random RandomX, RandomY;
 
     int[] duration = {20, 20};
     Animation ninja, movingUp, movingLeft, movingRight, attack;
@@ -44,7 +44,7 @@ public class PlayScreen extends BasicGameState {
     boolean blobfishThreeAppears = true;
 
     Rectangle ninjaHitbox = new Rectangle(characterX, characterY, 130, 140);
-    Rectangle enemyHitbox = new Rectangle(RandomX, RandomY, 140, 120);
+    Rectangle enemyHitbox = new Rectangle(enemyX, enemyY, 140, 120);
     Rectangle enemyTwoHitbox = new Rectangle(400, 400, 140, 120);
     Rectangle enemyThreeHitbox = new Rectangle(600, 600, 140, 120);
 
@@ -80,10 +80,10 @@ public class PlayScreen extends BasicGameState {
         movingLeft.setAutoUpdate(true);
         ninja = movingLeft;
 
-        Random enemyX = new Random();
-        Random enemyY = new Random();
-        RandomX = enemyX.nextInt(1300);
-        RandomY = enemyY.nextInt(800);
+        RandomX = new Random();
+        RandomY = new Random();
+        enemyX = RandomX.nextInt(1300);
+        enemyY = RandomY.nextInt(800);
 
     }
 
@@ -96,12 +96,12 @@ public class PlayScreen extends BasicGameState {
         ninja.draw(characterX, characterY);
 
         ninjaHitbox.setLocation(characterX, characterY);
-        enemyHitbox.setLocation(RandomX, RandomY);
-        enemyTwoHitbox.setLocation(400, 400);
-        enemyThreeHitbox.setLocation(600, 600);
+        enemyHitbox.setLocation(enemyX, enemyY);
+        //enemyTwoHitbox.setLocation(400, 400);
+       // enemyThreeHitbox.setLocation(600, 600);
 
-        Rectangle backgroundHitbox = new Rectangle(RandomX, RandomY, 140, 120);
-        backgroundHitbox.setLocation(RandomX,RandomY);
+        Rectangle backgroundHitbox = new Rectangle(enemyX, enemyY, 140, 120);
+        backgroundHitbox.setLocation(enemyX,enemyY);
         backgroundHitbox.getLocation();
 
         LinkedList<Animation> list = new LinkedList<Animation>();
@@ -113,34 +113,35 @@ public class PlayScreen extends BasicGameState {
         //while (iterator.hasNext()){ //returns true if there are more elements in LinkedList
 
         if(blobfishAppears == true){
-            g.drawAnimation(blobfishAnimation, RandomX, RandomY);
+            g.drawAnimation(blobfishAnimation, enemyX, enemyY);
         }
-        if(blobfishAppears == false){
+        /*if(blobfishAppears == false){
             blobfishTwoAppears = true;
-        }
-        if(blobfishTwoAppears == true){
+        }*/
+        /*if(blobfishTwoAppears == true){
             g.drawAnimation(blobfishAnimation1, 400, 400);
-            //blobfishThreeAppears = true;
-        }
+
+        }*/
         /*if(blobfishTwoAppears == false && blobfishAppears == false){
             blobfishThreeAppears = true;
         }*/
-        if(blobfishThreeAppears == true) {
+        /*if(blobfishThreeAppears == true) {
             g.drawAnimation(blobfishAnimation2, 600, 600);
-        }
+        }*/
 
         if(ninja == attack && ninjaHitbox.intersects(enemyHitbox)){
-            blobfishAppears = false;
-            blobfishTwoAppears = true;
+            enemyX = RandomX.nextInt(1300);
+            enemyY = RandomY.nextInt(800);
+
             if(score == true){
                 gameTemplate.gamescore += 10;
                 score = false;
             }
         }
-        else{
+        /*else{
             blobfishTwoAppears = false;
-        }
-        if(ninja == attack && ninjaHitbox.intersects(enemyTwoHitbox)){
+        }*/
+       /* if(ninja == attack && ninjaHitbox.intersects(enemyTwoHitbox)){
             blobfishTwoAppears = false;
             blobfishThreeAppears = true;
             if(score == true){
@@ -150,7 +151,7 @@ public class PlayScreen extends BasicGameState {
         }
         else{
             blobfishThreeAppears = false;
-        }
+        }*/
 
         //if ninja intersects with 2nd hitbox, b3 appears. if not, then it disappears. b2 always appears
 
