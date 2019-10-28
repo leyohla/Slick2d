@@ -4,6 +4,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.geom.RoundedRectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -21,6 +22,7 @@ public class PlayScreen extends BasicGameState {
     int enemyX;
     int enemyY;
     private Random RandomX, RandomY;
+    private ShapeFill RoundedRectangle;
 
     int[] duration = {20, 20};
     Animation ninja, movingUp, movingLeft, movingRight, attack;
@@ -29,14 +31,15 @@ public class PlayScreen extends BasicGameState {
     private SpriteSheet blobfishSpritesheet;
     private Animation blobfishAnimation;
 
-
     boolean score = true;
     boolean blobfishAppears = true;
 
+    int maxHealth = 200;
+    int currentHealth = 200;
 
     Rectangle ninjaHitbox = new Rectangle(characterX, characterY, 130, 140);
     Rectangle enemyHitbox = new Rectangle(enemyX, enemyY, 140, 120);
-    //Rectangle dangerEnemyHitbox = new Rectangle(enemyX, enemyY, 70, 40);
+    Rectangle dangerEnemyHitbox = new Rectangle(enemyX +90, enemyY, 20, 50);
 
 
     public PlayScreen(int state) {
@@ -75,15 +78,19 @@ public class PlayScreen extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
         background.draw();
-        g.drawString("X pos: " + characterX + "\nY pos: " + characterY, 400, 200);
+        //g.drawString("X pos: " + characterX + "\nY pos: " + characterY, 400, 200);
         g.drawString("Score: " + gameTemplate.gamescore, 900, 100);
 
         ninja.draw(characterX, characterY);
 
+        /*g.fillRoundRect(200, 50, currentHealth, 30,3);
+        g.setColor(Color.red);*/
+        g.fillRoundRect(1000, 50, maxHealth, 30, 10);
+        g.setColor(Color.green);
+
+
         ninjaHitbox.setLocation(characterX, characterY);
         enemyHitbox.setLocation(enemyX, enemyY);
-
-        Rectangle dangerEnemyHitbox = new Rectangle(enemyX +90, enemyY, 20, 50);
         dangerEnemyHitbox.setLocation(enemyX +90, enemyY);
 
 
@@ -97,14 +104,18 @@ public class PlayScreen extends BasicGameState {
             enemyY = RandomY.nextInt(800);
 
             if(score == true){
-                gameTemplate.gamescore += 10;
-                //score = false;
+                //if(maxHealth != 200){
+                    //maxHealth += 20;
+                    gameTemplate.gamescore += 10;
+                    //score = false;
+                //}
             }
         }
         if(ninja != attack && ninjaHitbox.intersects(dangerEnemyHitbox)) {
             ninja.draw(characterX,characterY, Color.red);
 
             if(score == true){
+                //maxHealth -= 20;
                 gameTemplate.gamescore -= 5;
                 score = false;
                 update(gc,sbg,20);
