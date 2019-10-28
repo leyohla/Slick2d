@@ -176,4 +176,5 @@ public class PlayScreen extends BasicGameState {
 
 //fixed respawn
 //smoother sprite transition
-//fixed gamescore
+
+//to-do: fix gamescores
