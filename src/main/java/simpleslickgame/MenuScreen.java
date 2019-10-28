@@ -8,8 +8,8 @@ import org.newdawn.slick.Graphics;
 
 public class MenuScreen extends BasicGameState {
 
-    public static final String gamename = "Welcome to the GAME";
-    public static String mouse = "co-ordinates";
+    public static final String gamename = "Welcome to blob attack";
+    //public static String mouse = "co-ordinates";
 
     public MenuScreen(int state){
     }
@@ -18,14 +18,13 @@ public class MenuScreen extends BasicGameState {
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-//        Image newgame = new Image("C:\\Users\\lhunn\\IdeaProjects\\Slick2D\\src\\main\\resources\\newgame.png");
 
         Image newgame = new Image("src\\main\\resources\\newgame.png");
 
         g.drawString(gamename, 500, 200);
-        g.drawString(mouse, 400, 300);
+        //g.drawString(mouse, 400, 300);
         g.drawImage(newgame, 400, 400);
-        //g.setColor(Color.white);
+        g.drawString("Don't get too close to the fish", 400, 400);
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -34,7 +33,7 @@ public class MenuScreen extends BasicGameState {
         int xpos = Mouse.getX(); //tracks x and y co-ordinates of the mouse
         int ypos = Mouse.getY();
 
-        mouse = "x: " + xpos + "y: " + ypos;
+        //mouse = "x: " + xpos + "y: " + ypos;
 
         if((xpos < 900 && xpos > 500) && (ypos < 600 && ypos > 400)){
             if(input.isMouseButtonDown(0)){

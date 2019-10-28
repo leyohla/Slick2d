@@ -1,20 +1,19 @@
 package simpleslickgame;
 
 import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import java.awt.*;
-import java.util.Iterator;
-import java.util.LinkedList;
+
 import java.util.Random;
 
 public class PlayScreen extends BasicGameState {
 
     Image background;
-    Image backgroundHitbox;
     Image character;
     Image enemy;
     int characterX = 650;
@@ -29,8 +28,7 @@ public class PlayScreen extends BasicGameState {
 
     private SpriteSheet blobfishSpritesheet;
     private Animation blobfishAnimation;
-    private Animation blobfishAnimation1;
-    private Animation blobfishAnimation2;
+
 
     boolean score = true;
     boolean blobfishAppears = true;
@@ -38,6 +36,7 @@ public class PlayScreen extends BasicGameState {
 
     Rectangle ninjaHitbox = new Rectangle(characterX, characterY, 130, 140);
     Rectangle enemyHitbox = new Rectangle(enemyX, enemyY, 140, 120);
+    //Rectangle dangerEnemyHitbox = new Rectangle(enemyX, enemyY, 70, 40);
 
 
     public PlayScreen(int state) {
@@ -46,14 +45,12 @@ public class PlayScreen extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 
         background = new Image("src\\main\\resources\\image.png");
-        backgroundHitbox = new Image("src\\main\\resources\\image.png");
         character = new Image("src\\main\\resources\\ninja-two.png");
         enemy = new Image("src\\main\\resources\\enemy.png");
 
         blobfishSpritesheet = new SpriteSheet("sprite_sheet.png", 300, 128);
         blobfishAnimation = new Animation(blobfishSpritesheet, 300);
-        blobfishAnimation1 = new Animation(blobfishSpritesheet, 300);
-        blobfishAnimation2 = new Animation(blobfishSpritesheet, 300);
+
 
         Image[] ninjaLeft = {new Image("ninja-two.png"), new Image("ninja-two.png")};
         Image[] ninjaUp = {new Image("ninja-one.png"), new Image("ninja-one.png")};
@@ -86,10 +83,8 @@ public class PlayScreen extends BasicGameState {
         ninjaHitbox.setLocation(characterX, characterY);
         enemyHitbox.setLocation(enemyX, enemyY);
 
-
-        Rectangle backgroundHitbox = new Rectangle(enemyX, enemyY, 140, 120);
-        backgroundHitbox.setLocation(enemyX,enemyY);
-        backgroundHitbox.getLocation();
+        Rectangle dangerEnemyHitbox = new Rectangle(enemyX +90, enemyY, 20, 50);
+        dangerEnemyHitbox.setLocation(enemyX +90, enemyY);
 
 
         if(blobfishAppears == true){
@@ -104,6 +99,15 @@ public class PlayScreen extends BasicGameState {
             if(score == true){
                 gameTemplate.gamescore += 10;
                 //score = false;
+            }
+        }
+        if(ninja != attack && ninjaHitbox.intersects(dangerEnemyHitbox)) {
+            ninja.draw(characterX,characterY, Color.red);
+
+            if(score == true){
+                gameTemplate.gamescore -= 5;
+                score = false;
+                update(gc,sbg,20);
             }
         }
 
