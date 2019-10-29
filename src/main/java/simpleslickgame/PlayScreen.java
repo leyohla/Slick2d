@@ -83,9 +83,11 @@ public class PlayScreen extends BasicGameState {
         ninja.draw(characterX, characterY);
 
         g.fillRoundRect(1000, 50, maxHealth, 30, 10);
-        g.setColor(Color.green);
+        if(currentHealth >= 0 && currentHealth <= 200){
+            g.setColor(Color.green);
+        }
 
-        if(currentHealth <= 100) {
+        if(currentHealth <= 100 && currentHealth > 0) {
             g.setColor(Color.red);
         }
 
@@ -99,13 +101,13 @@ public class PlayScreen extends BasicGameState {
             g.drawAnimation(blobfishAnimation, enemyX, enemyY);
         }
 
-
         if(ninja == attack && ninjaHitbox.intersects(enemyHitbox)){
+            //score = true;
             enemyX = RandomX.nextInt(1300);
             enemyY = RandomY.nextInt(800);
 
             if(score == true){
-                if(maxHealth != 200){
+                if(maxHealth < 200){
                     currentHealth += 10;
                     maxHealth += 10;
                     gameTemplate.gamescore += 10;
@@ -113,7 +115,9 @@ public class PlayScreen extends BasicGameState {
                 }
             }
         }
+
         if(ninja != attack && ninjaHitbox.intersects(dangerEnemyHitbox)) {
+            //score = true;
             ninja.draw(characterX,characterY, Color.red);
 
             if(score == true){
@@ -123,8 +127,6 @@ public class PlayScreen extends BasicGameState {
                 score = false;
                 update(gc,sbg,20);
             }
-
-
         }
 
 
@@ -181,5 +183,6 @@ public class PlayScreen extends BasicGameState {
 
 //fixed respawn
 //smoother sprite transition
+//red zone - second enemy hitbox
 //added health bar
 //to-do: fix gamescores
