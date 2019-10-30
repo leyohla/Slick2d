@@ -121,7 +121,7 @@ public class PlayScreen extends BasicGameState {
             ninja.draw(characterX,characterY, Color.red);
 
             if(score == true){
-                if(maxHealth > 0){
+                if(maxHealth > 0 && maxHealth <= 200){
                     maxHealth -= 5;
                     //score = false;
                     //gameTemplate.gamescore -= 5;
@@ -130,6 +130,10 @@ public class PlayScreen extends BasicGameState {
                 /*currentHealth -= 5;
                 update(gc,sbg,20);*/
             }
+        }
+
+        if(maxHealth == 200) {
+            g.drawString("you win!!", 500,500);
         }
 
 
