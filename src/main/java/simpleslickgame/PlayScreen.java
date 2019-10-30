@@ -34,8 +34,8 @@ public class PlayScreen extends BasicGameState {
     boolean score = true;
     boolean blobfishAppears = true;
 
-    int maxHealth = 200; //length of green bar
-    int currentHealth = 200;
+    int maxHealth = 0; //length of green bar
+    int currentHealth = 0;
 
     Rectangle ninjaHitbox = new Rectangle(characterX, characterY, 130, 140);
     Rectangle enemyHitbox = new Rectangle(enemyX, enemyY, 140, 120);
@@ -78,12 +78,12 @@ public class PlayScreen extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
         background.draw();
-        g.drawString("Score: " + gameTemplate.gamescore, 900, 100);
+        //g.drawString("Score: " + gameTemplate.gamescore, 900, 100);
 
         ninja.draw(characterX, characterY);
 
         g.fillRoundRect(1000, 50, maxHealth, 30, 10);
-        if(currentHealth >= 0 && currentHealth <= 200){
+        if(currentHealth >= 100 && currentHealth <= 200){
             g.setColor(Color.green);
         }
 
@@ -107,10 +107,10 @@ public class PlayScreen extends BasicGameState {
             enemyY = RandomY.nextInt(800);
 
             if(score == true){
-                if(maxHealth < 200){
+                if(maxHealth < 200 && maxHealth >= 0){
                     currentHealth += 10;
                     maxHealth += 10;
-                    gameTemplate.gamescore += 10;
+                    //gameTemplate.gamescore += 10;
                     //score = false;
                 }
             }
@@ -121,11 +121,14 @@ public class PlayScreen extends BasicGameState {
             ninja.draw(characterX,characterY, Color.red);
 
             if(score == true){
-                maxHealth -= 5;
-                currentHealth -= 5;
-                gameTemplate.gamescore -= 5;
-                score = false;
-                update(gc,sbg,20);
+                if(maxHealth > 0){
+                    maxHealth -= 5;
+                    //score = false;
+                    //gameTemplate.gamescore -= 5;
+                }
+
+                /*currentHealth -= 5;
+                update(gc,sbg,20);*/
             }
         }
 
