@@ -34,8 +34,8 @@ public class PlayScreen extends BasicGameState {
     boolean score = true;
     boolean blobfishAppears = true;
 
-    int maxHealth = 0; //length of green bar
-    int currentHealth = 0;
+    int maxHealth = 5; //length of green bar
+    int currentHealth = 5;
 
     Rectangle ninjaHitbox = new Rectangle(characterX, characterY, 130, 140);
     Rectangle enemyHitbox = new Rectangle(enemyX, enemyY, 140, 120);
@@ -134,6 +134,10 @@ public class PlayScreen extends BasicGameState {
 
         if(maxHealth == 200) {
             g.drawString("you win!!", 500,500);
+        }
+        if(maxHealth == 0){
+            g.drawString("you lose", 500,500);
+            g.setColor(Color.white);
         }
 
 
