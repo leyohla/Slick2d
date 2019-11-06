@@ -17,6 +17,7 @@ public class PlayScreen extends BasicGameState {
     Image background;
     Image character;
     Image enemy;
+    Music music;
     int characterX = 650;
     int characterY = 500;
     int enemyX;
@@ -50,9 +51,12 @@ public class PlayScreen extends BasicGameState {
         background = new Image("src\\main\\resources\\image.png");
         character = new Image("src\\main\\resources\\ninja-two.png");
         enemy = new Image("src\\main\\resources\\enemy.png");
+        music = new Music("C:\\Users\\lhunn\\Downloads\\Blazer-Rail.ogg");
+        music.loop();
 
         blobfishSpritesheet = new SpriteSheet("sprite_sheet.png", 300, 128);
         blobfishAnimation = new Animation(blobfishSpritesheet, 300);
+
 
 
         Image[] ninjaLeft = {new Image("ninja-two.png"), new Image("ninja-two.png")};

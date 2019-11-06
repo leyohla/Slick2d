@@ -16,6 +16,7 @@ public class gameTemplate extends StateBasedGame {
     public static final int NINJA = 1;
     public static final int ENEMY = 1;
     public static int gamescore = 0;
+    Music music;
 
 
     public gameTemplate(String gamename) {
@@ -32,6 +33,7 @@ public class gameTemplate extends StateBasedGame {
         //this.getState(NINJA).init(gc, this);
         //this.getState(ENEMY).init(gc, this);
         this.enterState(MENU);
+
     }
 
     public void renderStatesList(GameContainer gc, Graphics g) throws SlickException {
