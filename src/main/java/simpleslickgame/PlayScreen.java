@@ -59,7 +59,7 @@ public class PlayScreen extends BasicGameState {
         whooshSound = new Sound("C:\\Users\\lhunn\\Downloads\\dustyroom_cartoon_swipe_high_pitched.ogg");
         hurtSound = new Sound("C:\\Users\\lhunn\\Downloads\\zapsplat_cartoon_climb_down_descend_fast_steps_ladder_cute_003_38468.ogg");
 
-        //music.loop();
+        music.loop();
 
         blobfishSpritesheet = new SpriteSheet("sprite_sheet.png", 300, 128);
         blobfishAnimation = new Animation(blobfishSpritesheet, 300);
@@ -132,6 +132,7 @@ public class PlayScreen extends BasicGameState {
         else {
             g.drawRoundRect(400,500,400,300,3);
             g.drawString("You're out of time!", 450,550);
+            music.stop();
         }
 
 
