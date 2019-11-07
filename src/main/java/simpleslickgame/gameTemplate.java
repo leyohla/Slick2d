@@ -15,8 +15,7 @@ public class gameTemplate extends StateBasedGame {
     public static final int PLAY_SCREEN = 1;
     public static final int NINJA = 1;
     public static final int ENEMY = 1;
-    public static int gamescore = 0;
-    Music music;
+    public static int gamescore;
 
 
     public gameTemplate(String gamename) {
@@ -54,6 +53,7 @@ public class gameTemplate extends StateBasedGame {
             Display.setResizable(true);
 //            appgc.setIcon("C:\\Users\\lhunn\\IdeaProjects\\Slick2D\\src\\main\\resources\\ninja-icon.png");
             appgc.setIcon("src\\main\\resources\\ninja-icon.png");
+            appgc.setTargetFrameRate(60);
 
             appgc.start();
         }

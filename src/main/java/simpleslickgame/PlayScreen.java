@@ -19,6 +19,7 @@ public class PlayScreen extends BasicGameState {
     Image enemy;
     Music music;
     Sound whooshSound;
+    Sound hurtSound;
     int characterX = 650;
     int characterY = 500;
     int enemyX;
@@ -54,6 +55,7 @@ public class PlayScreen extends BasicGameState {
         enemy = new Image("src\\main\\resources\\enemy.png");
         music = new Music("C:\\Users\\lhunn\\Downloads\\Blazer-Rail.ogg");
         whooshSound = new Sound("C:\\Users\\lhunn\\Downloads\\dustyroom_cartoon_swipe_high_pitched.ogg");
+        hurtSound = new Sound("C:\\Users\\lhunn\\Downloads\\zapsplat_comedy_impact_element_spring_hit_wobble.ogg");
 
         music.loop();
 
@@ -128,6 +130,7 @@ public class PlayScreen extends BasicGameState {
             if(score == true){
                 if(maxHealth > 0 && maxHealth <= 200){
                     maxHealth -= 5;
+                    hurtSound.play();
                     //score = false;
                     //gameTemplate.gamescore -= 5;
                 }
@@ -137,15 +140,13 @@ public class PlayScreen extends BasicGameState {
             }
         }
 
-
-        if(maxHealth == 200) {
+        if(maxHealth == 100) {
             g.drawString("you win!!", 500,500);
         }
         if(maxHealth == 0){
             g.drawString("you lose", 500,500);
             g.setColor(Color.white);
         }
-
 
         if (quit == true) {
             g.drawString("Quit (Q)", 750, 600);
@@ -159,6 +160,23 @@ public class PlayScreen extends BasicGameState {
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input input = gc.getInput();
+
+        enemyX -= 0.01 * delta;
+        enemyY -= 0.01 * delta;
+
+        if(enemyY < 793){
+            enemyY += delta * 1f;
+        }
+        if(enemyY > -18){
+            enemyY -= delta * 1f;
+        }
+        if(enemyX > -43){
+            enemyX -= delta * 1f;
+        }
+        if(enemyX < 1345){
+            enemyX += delta * 1f;
+        }
+
 
         if (characterY < 793) {
             if (input.isKeyDown(Input.KEY_DOWN)) {
@@ -189,6 +207,7 @@ public class PlayScreen extends BasicGameState {
             whooshSound.play();
             ninja = attack;
         }
+
         return;
     }
 
