@@ -18,6 +18,7 @@ public class PlayScreen extends BasicGameState {
     Image character;
     Image enemy;
     Music music;
+    Sound whooshSound;
     int characterX = 650;
     int characterY = 500;
     int enemyX;
@@ -52,12 +53,12 @@ public class PlayScreen extends BasicGameState {
         character = new Image("src\\main\\resources\\ninja-two.png");
         enemy = new Image("src\\main\\resources\\enemy.png");
         music = new Music("C:\\Users\\lhunn\\Downloads\\Blazer-Rail.ogg");
+        whooshSound = new Sound("C:\\Users\\lhunn\\Downloads\\dustyroom_cartoon_swipe_high_pitched.ogg");
+
         music.loop();
 
         blobfishSpritesheet = new SpriteSheet("sprite_sheet.png", 300, 128);
         blobfishAnimation = new Animation(blobfishSpritesheet, 300);
-
-
 
         Image[] ninjaLeft = {new Image("ninja-two.png"), new Image("ninja-two.png")};
         Image[] ninjaUp = {new Image("ninja-one.png"), new Image("ninja-one.png")};
@@ -68,7 +69,7 @@ public class PlayScreen extends BasicGameState {
         movingLeft = new Animation(ninjaLeft, duration, false);
         movingRight = new Animation(ninjaRight, duration, false);
         movingUp = new Animation(ninjaUp, duration, false);
-        attack = new Animation(ninjaJump, duration, true);
+        attack = new Animation(ninjaJump, duration, false);
         movingLeft.setAutoUpdate(true);
         ninja = movingLeft;
 
@@ -136,6 +137,7 @@ public class PlayScreen extends BasicGameState {
             }
         }
 
+
         if(maxHealth == 200) {
             g.drawString("you win!!", 500,500);
         }
@@ -184,6 +186,7 @@ public class PlayScreen extends BasicGameState {
             }
         }
         if (input.isKeyPressed(Input.KEY_SPACE)) {
+            whooshSound.play();
             ninja = attack;
         }
         return;
