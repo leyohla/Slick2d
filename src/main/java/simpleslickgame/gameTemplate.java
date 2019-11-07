@@ -15,7 +15,7 @@ public class gameTemplate extends StateBasedGame {
     public static final int PLAY_SCREEN = 1;
     public static final int NINJA = 1;
     public static final int ENEMY = 1;
-    public static int gamescore;
+    public static int gamescore = 0;
 
 
     public gameTemplate(String gamename) {
