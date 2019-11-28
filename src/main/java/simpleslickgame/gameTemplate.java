@@ -32,6 +32,7 @@ public class gameTemplate extends StateBasedGame {
         //this.getState(NINJA).init(gc, this);
         //this.getState(ENEMY).init(gc, this);
         this.enterState(MENU);
+
     }
 
     public void renderStatesList(GameContainer gc, Graphics g) throws SlickException {
@@ -52,6 +53,7 @@ public class gameTemplate extends StateBasedGame {
             Display.setResizable(true);
 //            appgc.setIcon("C:\\Users\\lhunn\\IdeaProjects\\Slick2D\\src\\main\\resources\\ninja-icon.png");
             appgc.setIcon("src\\main\\resources\\ninja-icon.png");
+            appgc.setTargetFrameRate(60);
 
             appgc.start();
         }
