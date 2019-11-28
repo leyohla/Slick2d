@@ -34,8 +34,8 @@ public class PlayScreen extends BasicGameState {
     boolean score = true;
     boolean blobfishAppears = true;
 
-    int maxHealth = 200;
-    int currentHealth = 200;
+    int maxHealth = 5; //length of green bar
+    int currentHealth = 5;
 
     Rectangle ninjaHitbox = new Rectangle(characterX, characterY, 130, 140);
     Rectangle enemyHitbox = new Rectangle(enemyX, enemyY, 140, 120);
@@ -78,15 +78,18 @@ public class PlayScreen extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
         background.draw();
-        //g.drawString("X pos: " + characterX + "\nY pos: " + characterY, 400, 200);
-        g.drawString("Score: " + gameTemplate.gamescore, 900, 100);
+        //g.drawString("Score: " + gameTemplate.gamescore, 900, 100);
 
         ninja.draw(characterX, characterY);
 
-        /*g.fillRoundRect(200, 50, currentHealth, 30,3);
-        g.setColor(Color.red);*/
         g.fillRoundRect(1000, 50, maxHealth, 30, 10);
-        g.setColor(Color.green);
+        if(currentHealth >= 100 && currentHealth <= 200){
+            g.setColor(Color.green);
+        }
+
+        if(currentHealth <= 100 && currentHealth > 0) {
+            g.setColor(Color.red);
+        }
 
 
         ninjaHitbox.setLocation(characterX, characterY);
@@ -98,28 +101,43 @@ public class PlayScreen extends BasicGameState {
             g.drawAnimation(blobfishAnimation, enemyX, enemyY);
         }
 
-
         if(ninja == attack && ninjaHitbox.intersects(enemyHitbox)){
+            //score = true;
             enemyX = RandomX.nextInt(1300);
             enemyY = RandomY.nextInt(800);
 
             if(score == true){
-                //if(maxHealth != 200){
-                    //maxHealth += 20;
-                    gameTemplate.gamescore += 10;
+                if(maxHealth < 200 && maxHealth >= 0){
+                    currentHealth += 10;
+                    maxHealth += 10;
+                    //gameTemplate.gamescore += 10;
                     //score = false;
-                //}
+                }
             }
         }
+
         if(ninja != attack && ninjaHitbox.intersects(dangerEnemyHitbox)) {
+            //score = true;
             ninja.draw(characterX,characterY, Color.red);
 
             if(score == true){
-                //maxHealth -= 20;
-                gameTemplate.gamescore -= 5;
-                score = false;
-                update(gc,sbg,20);
+                if(maxHealth > 0 && maxHealth <= 200){
+                    maxHealth -= 5;
+                    //score = false;
+                    //gameTemplate.gamescore -= 5;
+                }
+
+                /*currentHealth -= 5;
+                update(gc,sbg,20);*/
             }
+        }
+
+        if(maxHealth == 200) {
+            g.drawString("you win!!", 500,500);
+        }
+        if(maxHealth == 0){
+            g.drawString("you lose", 500,500);
+            g.setColor(Color.white);
         }
 
 
@@ -176,5 +194,6 @@ public class PlayScreen extends BasicGameState {
 
 //fixed respawn
 //smoother sprite transition
-
+//red zone - second enemy hitbox
+//added health bar
 //to-do: fix gamescores
