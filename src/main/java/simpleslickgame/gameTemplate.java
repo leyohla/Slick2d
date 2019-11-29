@@ -16,6 +16,7 @@ public class gameTemplate extends StateBasedGame {
     public static final int NINJA = 1;
     public static final int ENEMY = 1;
     public static int gamescore = 0;
+    public static final int LEVEL_TWO = 2;
 
 
     public gameTemplate(String gamename) {
@@ -23,14 +24,13 @@ public class gameTemplate extends StateBasedGame {
         this.addState(new MenuScreen(MENU));
         this.addState(new PlayScreen(PLAY_SCREEN));
         //this.addState(new BlobfishCharacter(ENEMY));
+        this.addState(new LevelTwo(LEVEL_TWO));
     }
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
         this.getState(MENU).init(gc, this);
         this.getState(PLAY_SCREEN).init(gc, this);
-        //this.getState(NINJA).init(gc, this);
-        //this.getState(ENEMY).init(gc, this);
         this.enterState(MENU);
 
     }

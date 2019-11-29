@@ -95,7 +95,8 @@ public class PlayScreen extends BasicGameState {
 
             if (maxHealth == 100) {
                 g.drawString("Level 1 complete", 500, 500);
-                g.setColor(Color.white);
+                //go to a new screen (level 2)
+                sbg.enterState(2);
             }
             if (maxHealth == 1) {
                 g.drawString("you lose", 500, 500);
@@ -126,7 +127,6 @@ public class PlayScreen extends BasicGameState {
                 //score = true;
                 ninja.draw(characterX, characterY, Color.red);
             }
-
         }
 
         else {
