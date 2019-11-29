@@ -17,6 +17,7 @@ public class gameTemplate extends StateBasedGame {
     public static final int ENEMY = 1;
     public static int gamescore = 0;
     public static final int LEVEL_TWO = 2;
+    public static final int GAME_OVER = 3;
 
 
     public gameTemplate(String gamename) {
@@ -25,6 +26,7 @@ public class gameTemplate extends StateBasedGame {
         this.addState(new PlayScreen(PLAY_SCREEN));
         //this.addState(new BlobfishCharacter(ENEMY));
         this.addState(new LevelTwo(LEVEL_TWO));
+        this.addState(new GameOver(GAME_OVER));
     }
 
     @Override

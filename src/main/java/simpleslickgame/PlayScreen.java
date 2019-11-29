@@ -95,12 +95,12 @@ public class PlayScreen extends BasicGameState {
 
             if (maxHealth == 100) {
                 g.drawString("Level 1 complete", 500, 500);
-                //go to a new screen (level 2)
                 sbg.enterState(2);
             }
             if (maxHealth == 1) {
-                g.drawString("you lose", 500, 500);
+                //g.drawString("you lose", 500, 500);
                 g.setColor(Color.white);
+                sbg.enterState(3);
             }
 
             g.fillRoundRect(1000, 50, maxHealth, 30, 10);
@@ -131,7 +131,7 @@ public class PlayScreen extends BasicGameState {
 
         else {
             g.drawRoundRect(400,500,400,300,3);
-            g.drawString("You're out of time!", 450,550);
+            sbg.enterState(3); //g.drawString("You're out of time!", 450,550);
             music.stop();
         }
 
