@@ -33,9 +33,9 @@ public class MenuScreen extends BasicGameState {
         int xpos = Mouse.getX(); //tracks x and y co-ordinates of the mouse
         int ypos = Mouse.getY();
 
-        if(input.isKeyDown(input.KEY_SPACE)){
+        /*if(input.isKeyDown(input.KEY_SPACE)){
             sbg.enterState(1);
-        }
+        }*/
 
 
         if((xpos < 900 && xpos > 500) && (ypos < 600 && ypos > 400)){

@@ -88,6 +88,7 @@ public class PlayScreen extends BasicGameState {
 
             background.draw();
             g.drawString("Score: " + gameTemplate.gamescore, 900, 100);
+            //g.drawString("Time: " + time, 100, 100); work out what the right time is 
 
         if(time < 20000) {
 
@@ -147,6 +148,7 @@ public class PlayScreen extends BasicGameState {
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+        time += delta;
         Input input = gc.getInput();
 
         time += delta; //add the time passed since last update()
