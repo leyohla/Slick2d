@@ -2,6 +2,7 @@ package simpleslickgame;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -17,12 +18,21 @@ public class GameOver extends BasicGameState {
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-        g.drawString("GAME OVER", 500, 500);
+        g.drawString("GAME OVER", 600, 300);
+        g.drawString("Start again: Y", 600,500);
+        g.drawString("Exit: N", 600, 600);
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        gc.setFullscreen(false);
+        Input input = gc.getInput();
+
+        if(input.isKeyDown(input.KEY_Y)){
+            sbg.enterState(0);
+        }
+        if(input.isKeyDown(input.KEY_N)){
+            sbg.enterState(0);
+        }
     }
 
     public int getID(){
@@ -30,3 +40,4 @@ public class GameOver extends BasicGameState {
     }
 }
 
+//make this into a window instead of filling a whole page
