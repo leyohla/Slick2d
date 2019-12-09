@@ -58,6 +58,9 @@ public class PlayScreen extends BasicGameState {
         music = new Music("C:\\Users\\lhunn\\Downloads\\Blazer-Rail.ogg");
         whooshSound = new Sound("C:\\Users\\lhunn\\Downloads\\dustyroom_cartoon_swipe_high_pitched.ogg");
         hurtSound = new Sound("C:\\Users\\lhunn\\Downloads\\zapsplat_cartoon_climb_down_descend_fast_steps_ladder_cute_003_38468.ogg");
+        //music = new Music("libs\\Blazer.Rail.ogg");
+        //whooshSound = new Sound("libs\\dustyroom_cartoon_swipe_high_pitched.ogg");
+        //hurtSound = new Sound("libs\\zapsplat_cartoon_climb_down_descend_fast_steps_ladder_cute_003_38468.ogg");
 
         music.loop();
 
