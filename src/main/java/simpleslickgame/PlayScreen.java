@@ -69,7 +69,6 @@ public class PlayScreen extends BasicGameState {
         Image[] ninjaRight = {new Image("ninja-three.png"), new Image("ninja-three.png")};
         Image[] ninjaJump = {new Image("ninja-five.png"), new Image("ninja-five.png")};
 
-
         movingLeft = new Animation(ninjaLeft, duration, false);
         movingRight = new Animation(ninjaRight, duration, false);
         movingUp = new Animation(ninjaUp, duration, false);
@@ -81,14 +80,13 @@ public class PlayScreen extends BasicGameState {
         RandomY = new Random();
         enemyX = RandomX.nextInt(1300);
         enemyY = RandomY.nextInt(800);
-
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
             background.draw();
             g.drawString("Score: " + gameTemplate.gamescore, 900, 100);
-            //g.drawString("Time: " + time, 100, 100); work out what the right time is 
+            g.drawString("Time: " + time, 100, 100);
 
         if(time < 20000) {
 
@@ -99,21 +97,19 @@ public class PlayScreen extends BasicGameState {
                 sbg.enterState(2);
             }
             if (maxHealth == 1) {
-                //g.drawString("you lose", 500, 500);
+                g.drawString("you lose", 500, 500);
                 g.setColor(Color.white);
-                sbg.enterState(3);
+                //sbg.enterState(3);
             }
 
             g.fillRoundRect(1000, 50, maxHealth, 30, 10);
             if (maxHealth >= 50 && maxHealth <= 100) {
                 g.setColor(Color.green);
-                //g.fill(roundRect, Color.green);
             }
 
             if (maxHealth <= 50 && maxHealth > 1) {
-                g.setColor(Color.red);
+                g.setColor(Color.yellow);
             }
-
 
             ninjaHitbox.setLocation(characterX, characterY);
             enemyHitbox.setLocation(enemyX, enemyY);
@@ -132,7 +128,8 @@ public class PlayScreen extends BasicGameState {
 
         else {
             g.drawRoundRect(400,500,400,300,3);
-            sbg.enterState(3); //g.drawString("You're out of time!", 450,550);
+            //sbg.enterState(3);
+            g.drawString("You're out of time!", 450,550);
             music.stop();
         }
 
@@ -148,11 +145,10 @@ public class PlayScreen extends BasicGameState {
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        time += delta;
         Input input = gc.getInput();
-
-        time += delta; //add the time passed since last update()
-        if(time < 20000) {
+        time += delta;
+        //time += delta; //add the time passed since last update()
+        //if(time < 20000) {
             enemyX -= 0.01 * delta;
             enemyY -= 0.01 * delta;
 
@@ -205,6 +201,7 @@ public class PlayScreen extends BasicGameState {
                 enemyX = RandomX.nextInt(1300);
                 enemyY = RandomY.nextInt(800);
 
+
                 if (score == true) {
                     if (maxHealth < 100 && maxHealth >= 0) {
                         maxHealth += 10;
@@ -223,7 +220,7 @@ public class PlayScreen extends BasicGameState {
                     }
                 }
             }
-        }
+
 
         return;
     }
