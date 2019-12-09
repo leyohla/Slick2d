@@ -33,6 +33,11 @@ public class GameOver extends BasicGameState {
         if(input.isKeyDown(input.KEY_N)){
             sbg.enterState(0);
         }
+        if(input.isKeyPressed( Input.KEY_Y)){
+            sbg.getState(1).init(gc, sbg);
+            sbg.enterState(1);
+        }
+
     }
 
     public int getID(){

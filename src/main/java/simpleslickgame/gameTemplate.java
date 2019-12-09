@@ -24,7 +24,6 @@ public class gameTemplate extends StateBasedGame {
         super(gamename); //superclass's constructor
         this.addState(new MenuScreen(MENU));
         this.addState(new PlayScreen(PLAY_SCREEN));
-        //this.addState(new BlobfishCharacter(ENEMY));
         this.addState(new LevelTwo(LEVEL_TWO));
         this.addState(new GameOver(GAME_OVER));
     }

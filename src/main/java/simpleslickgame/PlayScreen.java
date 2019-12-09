@@ -99,10 +99,10 @@ public class PlayScreen extends BasicGameState {
                 g.drawString("Level 1 complete", 500, 500);
                 sbg.enterState(2);
             }
-            if (maxHealth == 1) {
+            if (maxHealth == 5) {
                 g.drawString("you lose", 500, 500);
                 g.setColor(Color.white);
-                //sbg.enterState(3);
+                sbg.enterState(3);
             }
 
             g.fillRoundRect(1000, 50, maxHealth, 30, 10);
@@ -151,82 +151,78 @@ public class PlayScreen extends BasicGameState {
         Input input = gc.getInput();
         time += delta; //adds the time passed since last update() method call
 
-            enemyX -= 0.01 * delta;
-            enemyY -= 0.01 * delta;
+        enemyX -= 0.01 * delta;
+        enemyY -= 0.01 * delta;
 
-            if (enemyY < 793) {
-                enemyY += delta * 1f;
-            }
-            if (enemyY > -18) {
-                enemyY -= delta * 1f;
-            }
-            if (enemyX > -43) {
-                enemyX -= delta * 1f;
-            }
-            if (enemyX < 1345) {
-                enemyX += delta * 1f;
-            }
+        if (enemyY < 793) {
+            enemyY += delta * 1f;
+        }
+        if (enemyY > -18) {
+            enemyY -= delta * 1f;
+        }
+        if (enemyX > -43) {
+            enemyX -= delta * 1f;
+        }
+        if (enemyX < 1345) {
+            enemyX += delta * 1f;
+        }
 
 
-            if (characterY < 793) {
-                if (input.isKeyDown(Input.KEY_DOWN)) {
-                    ninja = movingLeft;
-                    characterY += delta * 1f;
+        if (characterY < 793) {
+            if (input.isKeyDown(Input.KEY_DOWN)) {
+                ninja = movingLeft;
+                characterY += delta * 1f;
+            }
+        }
+
+        if (characterY > -18) {
+            if (input.isKeyDown(Input.KEY_UP)) {
+                ninja = movingUp;
+                characterY -= delta * 1f;
+            }
+        }
+        if (characterX > -43) {
+            if (input.isKeyDown(Input.KEY_LEFT)) {
+                ninja = movingLeft;
+                characterX -= delta * 1f;
+            }
+        }
+        if (characterX < 1345) {
+            if (input.isKeyDown(Input.KEY_RIGHT)) {
+                ninja = movingRight;
+                characterX += delta * 1f;
+            }
+        }
+        if (input.isKeyPressed(Input.KEY_SPACE)) {
+            whooshSound.play();
+            ninja = attack;
+        }
+
+        if (ninja == attack && ninjaHitbox.intersects(enemyHitbox)) {
+
+            enemyX = RandomX.nextInt(1300);
+            enemyY = RandomY.nextInt(800);
+
+
+            if (score == true) {
+                if (maxHealth < 100 && maxHealth >= 0) {
+                    maxHealth += 10;
+                    gameTemplate.gamescore += 10;
+                    score = true;
                 }
             }
+        }
 
-            if (characterY > -18) {
-                if (input.isKeyDown(Input.KEY_UP)) {
-                    ninja = movingUp;
-                    characterY -= delta * 1f;
+        if (ninja != attack && ninjaHitbox.intersects(dangerEnemyHitbox)) {
+            if (score == true) {
+                if (maxHealth >= 10 && maxHealth <= 100) {
+                    maxHealth -= 5;
+                    gameTemplate.gamescore -= 5;
+                    hurtSound.play();
                 }
             }
-            if (characterX > -43) {
-                if (input.isKeyDown(Input.KEY_LEFT)) {
-                    ninja = movingLeft;
-                    characterX -= delta * 1f;
-                }
-            }
-            if (characterX < 1345) {
-                if (input.isKeyDown(Input.KEY_RIGHT)) {
-                    ninja = movingRight;
-                    characterX += delta * 1f;
-                }
-            }
-            if (input.isKeyPressed(Input.KEY_SPACE)) {
-                whooshSound.play();
-                ninja = attack;
-            }
-
-            if (ninja == attack && ninjaHitbox.intersects(enemyHitbox)) {
-
-                enemyX = RandomX.nextInt(1300);
-                enemyY = RandomY.nextInt(800);
-
-
-                if (score == true) {
-                    if (maxHealth < 100 && maxHealth >= 0) {
-                        maxHealth += 10;
-                        gameTemplate.gamescore += 10;
-                        score = true;
-                    }
-                }
-            }
-
-            if (ninja != attack && ninjaHitbox.intersects(dangerEnemyHitbox)) {
-                if (score == true) {
-                    if (maxHealth >= 10 && maxHealth <= 100) {
-                        maxHealth -= 5;
-                        gameTemplate.gamescore -= 5;
-                        hurtSound.play();
-                    }
-                }
-            }
-
-
-        return;
+        }
     }
-
 
     public int getID () {
         return 1;
