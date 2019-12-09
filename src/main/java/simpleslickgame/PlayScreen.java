@@ -146,9 +146,8 @@ public class PlayScreen extends BasicGameState {
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input input = gc.getInput();
-        time += delta;
-        //time += delta; //add the time passed since last update()
-        //if(time < 20000) {
+        time += delta; //adds the time passed since last update() method call
+
             enemyX -= 0.01 * delta;
             enemyY -= 0.01 * delta;
 
