@@ -40,7 +40,6 @@ public class PlayScreen extends BasicGameState {
     boolean blobfishAppears = true;
 
     int maxHealth = 0; //length of green bar
-    //int currentHealth = 0;
 
     Rectangle ninjaHitbox = new Rectangle(characterX, characterY, 130, 140);
     Rectangle enemyHitbox = new Rectangle(enemyX, enemyY, 140, 120);
@@ -55,14 +54,14 @@ public class PlayScreen extends BasicGameState {
         background = new Image("src\\main\\resources\\image.png");
         character = new Image("src\\main\\resources\\ninja-two.png");
         enemy = new Image("src\\main\\resources\\enemy.png");
+
+        //Note: to play these sounds, drag all 3 files from the 'game-music' folder to your own desktop, and replace the below paths with your own local desktop paths where you've saved the files.
+        //If not, then you'll need to just comment out the 4 lines below...then hopefully it will run...
         music = new Music("C:\\Users\\lhunn\\Downloads\\Blazer-Rail.ogg");
         whooshSound = new Sound("C:\\Users\\lhunn\\Downloads\\dustyroom_cartoon_swipe_high_pitched.ogg");
         hurtSound = new Sound("C:\\Users\\lhunn\\Downloads\\zapsplat_cartoon_climb_down_descend_fast_steps_ladder_cute_003_38468.ogg");
-        //music = new Music("libs\\Blazer.Rail.ogg");
-        //whooshSound = new Sound("libs\\dustyroom_cartoon_swipe_high_pitched.ogg");
-        //hurtSound = new Sound("libs\\zapsplat_cartoon_climb_down_descend_fast_steps_ladder_cute_003_38468.ogg");
-
         music.loop();
+
 
         blobfishSpritesheet = new SpriteSheet("sprite_sheet.png", 300, 128);
         blobfishAnimation = new Animation(blobfishSpritesheet, 300);
