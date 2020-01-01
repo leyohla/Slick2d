@@ -4,7 +4,6 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.geom.RoundedRectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -85,7 +84,7 @@ public class PlayScreen extends BasicGameState {
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-
+        Input input = gc.getInput();
             background.draw();
             g.drawString("Score: " + gameTemplate.gamescore, 900, 100);
             g.drawString("Time: " + time, 100, 100);
@@ -98,11 +97,7 @@ public class PlayScreen extends BasicGameState {
                 g.drawString("Level 1 complete", 500, 500);
                 sbg.enterState(2);
             }
-            if (maxHealth == 5) {
-                g.drawString("you lose", 500, 500);
-                g.setColor(Color.white);
-                sbg.enterState(3);
-            }
+
 
             g.fillRoundRect(1000, 50, maxHealth, 30, 10);
             if (maxHealth >= 50 && maxHealth <= 100) {
@@ -123,17 +118,23 @@ public class PlayScreen extends BasicGameState {
             }
 
             if (ninja != attack && ninjaHitbox.intersects(dangerEnemyHitbox)) {
-                //score = true;
+
                 ninja.draw(characterX, characterY, Color.red);
             }
+            if (maxHealth == 5) {
+
+                g.drawString("you lose", 500, 500);
+                g.setColor(Color.white);
+                sbg.enterState(3);
+
+            }
+        }
+        else {
+
+            g.drawString("You're out of time!", 450,550);
+            music.pause();
         }
 
-        else {
-            g.drawRoundRect(400,500,400,300,3);
-            //sbg.enterState(3);
-            g.drawString("You're out of time!", 450,550);
-            music.stop();
-        }
 
 
         if (quit == true) {
@@ -228,9 +229,3 @@ public class PlayScreen extends BasicGameState {
     }
 
 }
-
-//fixed respawn
-//smoother sprite transition
-//red zone - second enemy hitbox
-//added health bar
-//to-do: fix gamescores
