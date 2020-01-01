@@ -124,7 +124,9 @@ public class PlayScreen extends BasicGameState {
             if (maxHealth == 5) {
 
                 g.drawString("you lose", 500, 500);
+                music.pause();
                 g.setColor(Color.white);
+                sbg.getState(3).init(gc,sbg);
                 sbg.enterState(3);
 
             }

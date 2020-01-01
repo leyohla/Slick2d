@@ -9,7 +9,6 @@ import org.newdawn.slick.Graphics;
 public class MenuScreen extends BasicGameState {
 
     public static final String gamename = "Welcome to blob attack";
-    //public static String mouse = "co-ordinates";
 
     public MenuScreen(int state){
     }
@@ -22,9 +21,8 @@ public class MenuScreen extends BasicGameState {
         Image newgame = new Image("src\\main\\resources\\newgame.png");
 
         g.drawString(gamename, 500, 200);
-        //g.drawString(mouse, 400, 300);
         g.drawImage(newgame, 400, 400);
-        g.drawString("Don't get too close to the fish! Press spacebar to start", 400, 400);
+        g.drawString("Don't get too close to the fish! Press spacebar to start", 400, 300);
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -39,6 +37,7 @@ public class MenuScreen extends BasicGameState {
         // click doesn't properly transition to state 1 for some reason. so using spacebar
 
         if(input.isKeyDown(Input.KEY_SPACE)){
+            sbg.getState(1).init(gc,sbg);
             sbg.enterState(1);
         }
 
