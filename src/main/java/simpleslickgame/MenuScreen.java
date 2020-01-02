@@ -9,7 +9,7 @@ import org.newdawn.slick.Graphics;
 public class MenuScreen extends BasicGameState {
 
     public static final String gamename = "Welcome to blob attack";
-    boolean score = true;
+
 
     public MenuScreen(int state){
     }
@@ -32,7 +32,6 @@ public class MenuScreen extends BasicGameState {
         if(input.isKeyDown(Input.KEY_SPACE)){
             sbg.getState(1).init(gc,sbg);
             sbg.enterState(1);
-            score = true;
         }
 
     }

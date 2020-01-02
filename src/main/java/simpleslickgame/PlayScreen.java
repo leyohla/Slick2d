@@ -86,7 +86,7 @@ public class PlayScreen extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         Input input = gc.getInput();
             background.draw();
-            g.drawString("Score: " + gameTemplate.gamescore, 900, 100);
+            g.drawString("Score: " + gameTemplate.gamescore, 950, 100);
             g.drawString("Time: " + time, 100, 100);
 
         if(time < 20000) {
@@ -123,9 +123,13 @@ public class PlayScreen extends BasicGameState {
         }
 
         else {
-            g.drawString("You're out of time!", 450,550);
+
             music.pause();
             time = 0;
+            maxHealth = 0;
+            gameTemplate.gamescore = 0;
+            sbg.enterState(3);
+
         }
 
         if (maxHealth == 5) {
@@ -134,9 +138,10 @@ public class PlayScreen extends BasicGameState {
             g.setColor(Color.white);
             music.pause();
             time = 0;
-            score = false;
-            sbg.getState(3).init(gc,sbg);
+            maxHealth = 0;
+            gameTemplate.gamescore = 0;
             sbg.enterState(3);
+
         }
 
 
@@ -156,7 +161,8 @@ public class PlayScreen extends BasicGameState {
                 quit = false;
                 time = 0;
                 gc.resume();
-                score = true;
+                maxHealth = 0;
+                gameTemplate.gamescore = 0;
             }
             if(input.isKeyPressed(Input.KEY_R)){
                 quit = false;
@@ -166,9 +172,9 @@ public class PlayScreen extends BasicGameState {
                 music.pause();
                 time = 0;
                 quit = false;
-                score = false;
+                maxHealth = 0;
+                gameTemplate.gamescore = 0;
                 gc.resume();
-                score = true;
                 sbg.enterState(3);
 
             }
