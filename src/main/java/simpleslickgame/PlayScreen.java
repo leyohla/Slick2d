@@ -98,7 +98,6 @@ public class PlayScreen extends BasicGameState {
                 sbg.enterState(2);
             }
 
-
             g.fillRoundRect(1000, 50, maxHealth, 30, 10);
             if (maxHealth >= 50 && maxHealth <= 100) {
                 g.setColor(Color.green);
@@ -121,28 +120,59 @@ public class PlayScreen extends BasicGameState {
 
                 ninja.draw(characterX, characterY, Color.red);
             }
-            if (maxHealth == 5) {
-
-                g.drawString("you lose", 500, 500);
-                music.pause();
-                g.setColor(Color.white);
-                sbg.getState(3).init(gc,sbg);
-                sbg.enterState(3);
-
-            }
         }
-        else {
 
+        else {
             g.drawString("You're out of time!", 450,550);
             music.pause();
+            time = 0;
         }
 
+        if (maxHealth == 5) {
+
+            g.drawString("you lose", 500, 500);
+            g.setColor(Color.white);
+            music.pause();
+            time = 0;
+            score = false;
+            sbg.getState(3).init(gc,sbg);
+            sbg.enterState(3);
+        }
+
+
+        if(input.isKeyPressed(Input.KEY_ESCAPE)){
+            quit = true;
+            gc.pause();
+        }
 
 
         if (quit == true) {
-            g.drawString("Quit (Q)", 750, 600);
-            g.drawString("Resume (R)", 750, 500);
-            g.drawString("Main menu (M)", 750, 400);
+            g.drawString("Quit (Q)", 650, 600);
+            g.drawString("Resume (R)", 650, 500);
+            g.drawString("Main menu (M)", 650, 400);
+
+            if (input.isKeyPressed(Input.KEY_M)) {
+                sbg.enterState(0);
+                quit = false;
+                time = 0;
+                gc.resume();
+                score = true;
+            }
+            if(input.isKeyPressed(Input.KEY_R)){
+                quit = false;
+                gc.resume();
+            }
+            if(input.isKeyPressed(Input.KEY_Q)){
+                music.pause();
+                time = 0;
+                quit = false;
+                score = false;
+                gc.resume();
+                score = true;
+                sbg.enterState(3);
+
+            }
+
             if (quit == false) {
                 g.clear();
             }

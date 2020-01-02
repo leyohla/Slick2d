@@ -11,11 +11,10 @@ import org.newdawn.slick.state.StateBasedGame;
 public class gameTemplate extends StateBasedGame {
 
     public static final String gamename = "Welcome to the GAME";
+    public static int gamescore = 0;
+
     public static final int MENU = 0;
     public static final int PLAY_SCREEN = 1;
-    public static final int NINJA = 1;
-    public static final int ENEMY = 1;
-    public static int gamescore = 0;
     public static final int LEVEL_TWO = 2;
     public static final int GAME_OVER = 3;
 

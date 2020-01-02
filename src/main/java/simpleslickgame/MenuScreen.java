@@ -9,6 +9,7 @@ import org.newdawn.slick.Graphics;
 public class MenuScreen extends BasicGameState {
 
     public static final String gamename = "Welcome to blob attack";
+    boolean score = true;
 
     public MenuScreen(int state){
     }
@@ -28,17 +29,10 @@ public class MenuScreen extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input input = gc.getInput();
 
-        int xpos = Mouse.getX(); //tracks x and y co-ordinates of the mouse
-        int ypos = Mouse.getY();
-
-        //if((xpos < 900 && xpos > 500) && (ypos < 600 && ypos > 400)){
-        //if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-
-        // click doesn't properly transition to state 1 for some reason. so using spacebar
-
         if(input.isKeyDown(Input.KEY_SPACE)){
             sbg.getState(1).init(gc,sbg);
             sbg.enterState(1);
+            score = true;
         }
 
     }

@@ -8,6 +8,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class GameOver extends BasicGameState {
+
     public GameOver(int state){
     }
 
@@ -30,13 +31,13 @@ public class GameOver extends BasicGameState {
         if(input.isKeyDown(input.KEY_Y)){
             sbg.getState(0).init(gc,sbg);
             sbg.enterState(0);
+
         }
         if(input.isKeyDown(input.KEY_N)){
             sbg.getState(0).init(gc,sbg);
             sbg.enterState(0);
+
         }
-
-
 
     }
 
@@ -45,4 +46,4 @@ public class GameOver extends BasicGameState {
     }
 }
 
-//make this into a window instead of filling a whole page
+//could make this into a window instead of filling a whole page
