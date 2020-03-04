@@ -11,26 +11,26 @@ import org.newdawn.slick.state.StateBasedGame;
 public class gameTemplate extends StateBasedGame {
 
     public static final String gamename = "Welcome to the GAME";
+    public static int gamescore = 0;
+
     public static final int MENU = 0;
     public static final int PLAY_SCREEN = 1;
-    public static final int NINJA = 1;
-    public static final int ENEMY = 1;
-    public static int gamescore = 0;
+    public static final int LEVEL_TWO = 2;
+    public static final int GAME_OVER = 3;
 
 
     public gameTemplate(String gamename) {
         super(gamename); //superclass's constructor
         this.addState(new MenuScreen(MENU));
         this.addState(new PlayScreen(PLAY_SCREEN));
-        //this.addState(new BlobfishCharacter(ENEMY));
+        this.addState(new LevelTwo(LEVEL_TWO));
+        this.addState(new GameOver(GAME_OVER));
     }
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
         this.getState(MENU).init(gc, this);
         this.getState(PLAY_SCREEN).init(gc, this);
-        //this.getState(NINJA).init(gc, this);
-        //this.getState(ENEMY).init(gc, this);
         this.enterState(MENU);
 
     }
