@@ -3,7 +3,7 @@
     <CLASSES />
     <JAVADOC />
     <NATIVE>
-      <root url="file://$PROJECT_DIR$/../Slick2D/Slick2D/lwjgl-3.2.2" />
+      <root url="file://$PROJECT_DIR$/../Slick2d/Slick2D/lwjgl-3.2.2" />
     </NATIVE>
     <SOURCES />
   </library>

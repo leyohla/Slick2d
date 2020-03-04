@@ -50,15 +50,15 @@ public class PlayScreen extends BasicGameState {
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 
-        background = new Image("src\\main\\resources\\image.png");
-        character = new Image("src\\main\\resources\\ninja-two.png");
-        enemy = new Image("src\\main\\resources\\enemy.png");
+        background = new Image("image.png");
+        character = new Image("ninja-two.png");
+        enemy = new Image("enemy.png");
 
         //Note: to play these sounds, drag all 3 files from the 'game-music' folder to your own desktop, and replace the below paths with your own local desktop paths where you've saved the files.
         //If not, then you'll need to just comment out the 4 lines below...then hopefully it will run...
-        music = new Music("C:\\Users\\lhunn\\Downloads\\Blazer-Rail.ogg");
-        whooshSound = new Sound("C:\\Users\\lhunn\\Downloads\\dustyroom_cartoon_swipe_high_pitched.ogg");
-        hurtSound = new Sound("C:\\Users\\lhunn\\Downloads\\zapsplat_cartoon_climb_down_descend_fast_steps_ladder_cute_003_38468.ogg");
+        music = new Music("game-music/Blazer-Rail.ogg");
+        whooshSound = new Sound("game-music/dustyroom_cartoon_swipe_high_pitched.ogg");
+        hurtSound = new Sound("game-music/zapsplat_cartoon_climb_down_descend_fast_steps_ladder_cute_003_38468.ogg");
         music.loop();
 
 
