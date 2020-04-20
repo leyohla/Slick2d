@@ -29,8 +29,6 @@ public class PlayScreen extends BasicGameState {
     private ShapeFill RoundedRectangle;
     private ShapeFill roundRect;
 
-    private long startTime = 10;
-    private long runTime = 0;
 
     int[] duration = {20, 20};
     Animation ninja, movingUp, movingLeft, movingRight, attack;
