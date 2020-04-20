@@ -7,6 +7,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+
 import java.awt.*;
 
 import java.util.Random;
@@ -23,10 +24,13 @@ public class PlayScreen extends BasicGameState {
     int characterY = 500;
     int enemyX;
     int enemyY;
-    int time = 0;
+    int time = 20000;
     private Random RandomX, RandomY;
     private ShapeFill RoundedRectangle;
     private ShapeFill roundRect;
+
+    private long startTime = 10;
+    private long runTime = 0;
 
     int[] duration = {20, 20};
     Animation ninja, movingUp, movingLeft, movingRight, attack;
@@ -42,7 +46,7 @@ public class PlayScreen extends BasicGameState {
 
     Rectangle ninjaHitbox = new Rectangle(characterX, characterY, 130, 140);
     Rectangle enemyHitbox = new Rectangle(enemyX, enemyY, 140, 120);
-    Rectangle dangerEnemyHitbox = new Rectangle(enemyX +90, enemyY, 20, 50);
+    Rectangle dangerEnemyHitbox = new Rectangle(enemyX + 90, enemyY, 20, 50);
 
 
     public PlayScreen(int state) {
@@ -85,11 +89,17 @@ public class PlayScreen extends BasicGameState {
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         Input input = gc.getInput();
-            background.draw();
-            g.drawString("Score: " + gameTemplate.gamescore, 950, 100);
-            g.drawString("Time: " + time, 100, 100);
+        background.draw();
+        g.drawString("Score: " + gameTemplate.gamescore, 950, 100);
+        g.drawString("Time: " + time, 100, 100);
 
         if(time < 20000) {
+        //startTime = System.currentTimeMillis();
+        //startTime = runTime;
+
+        //while (System.currentTimeMillis() - startTime < runTime) { //loops until the current time - the start time is less then the specified run time.
+            //Runs this
+
 
             ninja.draw(characterX, characterY);
 
@@ -122,7 +132,8 @@ public class PlayScreen extends BasicGameState {
             }
         }
 
-        else {
+
+        /*while {
 
             music.pause();
             time = 0;
@@ -130,22 +141,22 @@ public class PlayScreen extends BasicGameState {
             gameTemplate.gamescore = 0;
             sbg.enterState(3);
 
-        }
+        }*/
 
         if (maxHealth == 5) {
 
             g.drawString("you lose", 500, 500);
             g.setColor(Color.white);
             music.pause();
-            time = 0;
+            time = 20000;
             maxHealth = 0;
             gameTemplate.gamescore = 0;
-            sbg.enterState(3);
-
+            sbg.enterState(0);
+            music.pause();
         }
 
 
-        if(input.isKeyPressed(Input.KEY_ESCAPE)){
+        if (input.isKeyPressed(Input.KEY_ESCAPE)) {
             quit = true;
             gc.pause();
         }
@@ -164,11 +175,11 @@ public class PlayScreen extends BasicGameState {
                 maxHealth = 0;
                 gameTemplate.gamescore = 0;
             }
-            if(input.isKeyPressed(Input.KEY_R)){
+            if (input.isKeyPressed(Input.KEY_R)) {
                 quit = false;
                 gc.resume();
             }
-            if(input.isKeyPressed(Input.KEY_Q)){
+            if (input.isKeyPressed(Input.KEY_Q)) {
                 music.pause();
                 time = 0;
                 quit = false;
@@ -185,9 +196,13 @@ public class PlayScreen extends BasicGameState {
         }
     }
 
+
+
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input input = gc.getInput();
-        time += delta; //adds the time passed since last update() method call
+        time -= delta; //adds the time passed since last update() method call
+
+        //runTime -= 1 * System.currentTimeMillis();
 
         enemyX -= 0.01 * delta;
         enemyY -= 0.01 * delta;

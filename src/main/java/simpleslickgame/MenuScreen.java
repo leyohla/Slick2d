@@ -29,6 +29,12 @@ public class MenuScreen extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input input = gc.getInput();
 
+        if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
+            sbg.getState(1).init(gc,sbg);
+            sbg.enterState(1);
+        }
+
+
         if(input.isKeyDown(Input.KEY_SPACE)){
             sbg.getState(1).init(gc,sbg);
             sbg.enterState(1);

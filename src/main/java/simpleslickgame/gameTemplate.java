@@ -32,6 +32,7 @@ public class gameTemplate extends StateBasedGame {
         this.getState(MENU).init(gc, this);
         this.getState(PLAY_SCREEN).init(gc, this);
         this.enterState(MENU);
+        this.getState(LEVEL_TWO);
 
     }
 
