@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../out/production/lwjgl-3.2.2" />
+    <output-test url="file://$MODULE_DIR$/../../out/test/lwjgl-3.2.2" />
+    <exclude-output />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
